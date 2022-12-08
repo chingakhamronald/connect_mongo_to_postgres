@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:14.1-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=card
+    ports:
+      - "6000:5432"
+    volumes:
+      - ./db:/var/lib/postgresql/data
