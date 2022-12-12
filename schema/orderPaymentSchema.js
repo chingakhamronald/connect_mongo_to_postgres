@@ -34,7 +34,6 @@ const orderPaymentSchema = new Schema({
   },
   orderNo: {
     type: String,
-    require: true,
   },
   timestamp: {
     type: Date,

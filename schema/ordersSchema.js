@@ -21,6 +21,9 @@ const orderSchema = new Schema({
   bookingInfo: {
     type: Object,
   },
+  orderNo: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("orders", orderSchema);
