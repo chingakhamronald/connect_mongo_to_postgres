@@ -18,32 +18,34 @@ const port = process.env.PORT;
 
   const count = await Order.find({}).count();
 
-  for (i = 0; i <= orderPaymentCount; i += 500) {
-    const orderPayment = (await OrderPayments.find({}).limit(5000).skip(0)).map(
+  for (i = 0; i <= orderPaymentCount; i += 5000) {
+    const orderPayment = (await OrderPayments.find({}).limit(5000).skip(i)).map(
       (e) => {
         return {
-          id: e._id + "",
+          paymentId: e._id + "",
           invoiceId: e.invoiceId,
-          amount: e.amount,
-          timestamp: e.timestamp,
           cardNo: e.cardNo,
-          referenceId: e.referenceId,
           status: e.status,
-          reason: e.reason,
+          timestamp: e.timestamp,
+          amount: e.amount,
+          referenceId: e.referenceId,
           source: e.source,
           paymentType: e.paymentType,
-          Id: e.id,
+          reason: e.reason,
+          iid: e.id,
+          orderno: e.orderNo,
         };
       }
     );
-    await prisma.orderPayments.createMany({
+
+    await prisma.payments.createMany({
       data: orderPayment,
       skipDuplicates: true,
     });
   }
 
   for (i = 0; i <= count; i += 5000) {
-    const order = (await Order.find({}).skip(0).limit(5000)).map((data) => {
+    const order = (await Order.find({}).limit(5000).skip(i)).map((data) => {
       return {
         id: data._id + "",
         destination: data.destination,
@@ -51,7 +53,7 @@ const port = process.env.PORT;
         flightNumber: data.flightNumber,
         crew: data.crew,
         bookingInfo: data.bookingInfo,
-        orderNo: data.orderNo,
+        orderno: data.orderNo,
       };
     });
 

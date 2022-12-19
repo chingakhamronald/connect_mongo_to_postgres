@@ -42,6 +42,9 @@ const orderPaymentSchema = new Schema({
     type: String,
     require: true,
   },
+  orderNo: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model(

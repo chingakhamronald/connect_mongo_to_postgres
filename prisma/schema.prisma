@@ -11,30 +11,28 @@ datasource db {
 }
 
 model orders {
-  // iid           Int             @id @unique @default(autoincrement())
-  id            String?
-  flightNumber  String?
-  destination   String?
-  origin        String?
-  crew          Json?
-  bookingInfo   Json?
-  orderNo       String          @unique
-  orderPayments orderPayments[]
+  iid          Int    @id @unique @default(autoincrement())
+  id           String
+  flightNumber String
+  crew         Json
+  bookingInfo  Json
+  destination  String
+  origin       String
+  orderno      String @unique
 }
 
-model orderPayments {
-  id            String   @unique
-  invoiceId     String?
-  amount        Int?
-  cardNo        String?
-  referenceId   String?
-  status        String
-  reason        String?
-  source        String?
-  paymentType   String?
-  timestamp     DateTime
-  Id            String
-  orderNo       String?
-  orders        orders?  @relation(fields: [ordersOrderNo], references: [orderNo])
-  ordersOrderNo String?
+model payments {
+  id          String   @id @unique @default(uuid())
+  paymentId   String?
+  invoiceId   String?
+  cardNo      String
+  status      String
+  timestamp   DateTime
+  amount      Int
+  referenceId String?
+  source      String
+  paymentType String
+  reason      String?
+  iid         String?
+  orderno     String
 }
