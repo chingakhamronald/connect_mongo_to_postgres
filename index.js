@@ -5,6 +5,7 @@ const Order = require("./schema/ordersSchema");
 const OrderPayments = require("./schema/orderPaymentSchema");
 const dotenv = require("dotenv");
 const Express = require("express");
+const cors = require("cors");
 const app = Express();
 const OrderRouter = require("./app/orders/router");
 dotenv.config();
@@ -22,7 +23,7 @@ const port = process.env.PORT;
     const orderPayment = (await OrderPayments.find({}).limit(5000).skip(i)).map(
       (e) => {
         return {
-          paymentId: e._id + "",
+          id: e._id + "",
           invoiceId: e.invoiceId,
           cardNo: e.cardNo,
           status: e.status,
@@ -65,6 +66,8 @@ const port = process.env.PORT;
 })().finally(() => {
   mongoose.disconnect();
 });
+
+app.use(cors());
 
 app.use("/api/orders", OrderRouter);
 

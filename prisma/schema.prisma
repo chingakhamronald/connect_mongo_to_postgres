@@ -11,8 +11,7 @@ datasource db {
 }
 
 model orders {
-  iid          Int    @id @unique @default(autoincrement())
-  id           String
+  id           String @id @unique
   flightNumber String
   crew         Json
   bookingInfo  Json
@@ -22,8 +21,7 @@ model orders {
 }
 
 model payments {
-  id          String   @id @unique @default(uuid())
-  paymentId   String?
+  id          String   @id @unique
   invoiceId   String?
   cardNo      String
   status      String

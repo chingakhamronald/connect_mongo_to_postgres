@@ -9,7 +9,7 @@ module.exports.Orders = async (req, res) => {
 
   try {
     const orders =
-      await prisma.$queryRaw`SELECT * FROM payments FULL OUTER JOIN orders ON payments.orderno=orders.orderno LIMIT ${take} OFFSET ${skip}`;
+      await prisma.$queryRaw`SELECT * FROM payments  FULL OUTER JOIN orders ON payments.orderno=orders.orderno WHERE iid IS NOT NULL LIMIT ${take} OFFSET ${skip} `;
     res.status(200).json(orders);
   } catch (err) {
     res.status(500).json(err.message);

@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const Controller = require("./controller");
 
-router.get("/", Controller.Orders);
+router.post("/", Controller.Orders);
 
 module.exports = router;
