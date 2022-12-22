@@ -11,7 +11,7 @@ datasource db {
 }
 
 model orders {
-  id           String @id @unique
+  iid          String @id @unique
   flightNumber String
   crew         Json
   bookingInfo  Json
