@@ -8,9 +8,12 @@ module.exports.Orders = async (req, res) => {
   const skip = Math.max(pageNo - 1, 0) * take;
 
   try {
-    const orders =
+    const payments =
       await prisma.$queryRaw`SELECT * FROM payments  FULL OUTER JOIN orders ON payments.orderno=orders.orderno  WHERE payments.iid IS NOT NULL LIMIT ${take} OFFSET ${skip} `;
-    res.status(200).json(orders);
+
+      const totalPayments = await prisma.$queryRaw`SELECT COUNT(*) FROM payments`
+
+    res.status(200).json({payments: payments , totalPayments: totalPayments[0].count + ""});
   } catch (err) {
     res.status(500).json(err.message);
   }
