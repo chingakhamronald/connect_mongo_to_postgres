@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 module.exports = async () => {
   // const URL = "mongodb://20.244.50.254:27017/goair";
-  const URL = "mongodb://localhost:27017/goair";
+  const URL = "mongodb://localhost:27017/cardlist";
   try {
     await mongoose.connect(URL, {
       useUnifiedTopology: true,

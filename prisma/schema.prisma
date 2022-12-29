@@ -34,3 +34,46 @@ model payments {
   iid         String?
   orderno     String
 }
+
+model card {
+  id               String  @id @unique
+  merchantName     String?
+  merchantCity     String?
+  dateTime         String?
+  mId              String?
+  tId              String?
+  custDeviceId     Float?
+  tipAmount        Float?
+  amount           Float?
+  cardNo           String?
+  txType           String?
+  txStatus         String?
+  type             String?
+  authNo           BigInt?
+  rrNo             Float?
+  crType           String?
+  batchNo          Float?
+  batchTotal       String?
+  loginId          Float?
+  cardHolderMobile Float?
+  cardHolderName   String?
+  cardTxnType      String?
+  email            String?
+  refNo            String?
+  notes            String?
+  applicationNo    String?
+  folioNo          String?
+  schemaType       String?
+  subFundName      String?
+  clientId         String?
+  extraNote1       String?
+  extraNote2       String?
+  extraNote3       String?
+  extraNote4       String?
+  extraNote5       String?
+  extraNote6       String?
+  extraNote7       String?
+  extraNote8       String?
+  extraNote9       String?
+  extraNote10      String?
+}
