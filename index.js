@@ -20,7 +20,7 @@ const port = process.env.PORT;
   const count = await Order.find({}).count();
 
   for (i = 0; i <= orderPaymentCount; i += 5000) {
-    const orderPayment = (await OrderPayments.find({}).limit(5000).skip()).map(
+    const orderPayment = (await OrderPayments.find({}).limit(5000).skip(i)).map(
       (e) => {
         return {
           id: e._id + "",
@@ -46,7 +46,7 @@ const port = process.env.PORT;
   }
 
   for (i = 0; i <= count; i += 5000) {
-    const order = (await Order.find({}).limit(5000).skip()).map((data) => {
+    const order = (await Order.find({}).limit(5000).skip(i)).map((data) => {
       return {
         iid: data._id + "",
         destination: data.destination,
