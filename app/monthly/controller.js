@@ -8,10 +8,15 @@ module.exports.Monthly = async (req, res) => {
   const skip = Math.max(pageNo - 1, 0) * take;
 
   try {
-    const monthly =
-      await prisma.$queryRaw`SELECT * FROM card LIMIT=${take} OFFSET=${skip}`;
+    const monthly = await prisma.card.findMany({
+      take: take,
+      skip: skip,
+    });
 
-    res.status(200).json(monthly);
+    const updateData = JSON.stringify(monthly, (_, v) =>
+      typeof v === "bigint" ? v.toString() : v
+    );
+    res.status(200).json(updateData);
   } catch (err) {
     res.status(500).json(err.message);
   }
