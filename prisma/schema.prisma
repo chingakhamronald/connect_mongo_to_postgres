@@ -11,13 +11,12 @@ datasource db {
 }
 
 model orders {
-  iid          String @id @unique
+  iid          String  @id @unique
   flightNumber String
-  crew         Json
   bookingInfo  Json
-  destination  String
-  origin       String
-  orderno      String @unique
+  totalAmount  Float?
+  date         String
+  orderno      String?
 }
 
 model payments {
@@ -36,7 +35,7 @@ model payments {
 }
 
 model card {
-  id               String  @id @unique
+  refno            String  @unique
   merchantName     String?
   merchantCity     String?
   dateTime         String?
@@ -59,7 +58,6 @@ model card {
   cardHolderName   String?
   cardTxnType      String?
   email            String?
-  refNo            String?
   notes            String?
   applicationNo    String?
   folioNo          String?

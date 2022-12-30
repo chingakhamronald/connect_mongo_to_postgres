@@ -4,15 +4,15 @@ module.exports.Monthly = async (req, res) => {
   const take = Number(req.query.pageSize);
   const pageNo = req.query.pageNo;
   const skip = Math.max(pageNo - 1, 0) * take;
+
   try {
-    const monthly = await prisma.card.findMany({
-      take: take,
-      skip: skip,
-    });
+    const monthly =
+      await prisma.$queryRaw`SELECT * FROM card  LEFT JOIN orders ON card.refno=orders.orderno LIMIT ${take} OFFSET ${skip}`;
+
     const totalMonthlyData = await prisma.card.count();
+
     const updateData = JSON.parse(
       JSON.stringify(monthly, (_, v) => {
-        if (typeof v === "bigint") console.log({ v });
         return typeof v === "bigint" ? v.toString() : v;
       })
     );

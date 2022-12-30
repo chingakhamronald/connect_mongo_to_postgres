@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const monthlySchema = new Schema({
-  _id: {
+  "Ref No": {
     type: String,
     require: true,
   },
@@ -61,9 +61,6 @@ const monthlySchema = new Schema({
     type: Number,
   },
   "Card Holder Email Id": {
-    type: String,
-  },
-  "Ref No": {
     type: String,
   },
   Notes: {
@@ -125,4 +122,4 @@ const monthlySchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("order_list", monthlySchema, "order_list");
+module.exports = mongoose.model("category", monthlySchema, "category");
