@@ -48,28 +48,11 @@ const port = process.env.PORT;
   //   });
   // }
 
-  for (i = 0; i <= count; i += 5000) {
-    const order = (await Order.find({}).limit(5000).skip(i)).map((data) => {
-      return {
-        iid: data._id,
-        orderno: data.orderNo,
-        date: data.timestamp,
-        totalAmount: data.totalAmount,
-        flightNumber: data.flightNumber,
-        bookingInfo: data.bookingInfo,
-      };
-    });
-
-    await prisma.orders.createMany({
-      data: order,
-      skipDuplicates: true,
-    });
-  }
-
   for (i = 0; i <= monthlyCount; i += 5000) {
     const orderList = (await MonthlyCount.find({}).limit(5000).skip(i)).map(
       (data) => {
         return {
+          id: data._id,
           refno: data["Ref No"],
           merchantName: data["Merchant Name"],
           merchantCity: data["Merchant City"],
@@ -114,6 +97,24 @@ const port = process.env.PORT;
 
     await prisma.card.createMany({
       data: orderList,
+      skipDuplicates: true,
+    });
+  }
+
+  for (i = 0; i <= count; i += 5000) {
+    const order = (await Order.find({}).limit(5000).skip(i)).map((data) => {
+      return {
+        iid: data._id,
+        orderno: data.orderNo,
+        date: data.timestamp,
+        totalAmount: data.totalAmount,
+        flightNumber: data.flightNumber,
+        bookingInfo: data.bookingInfo,
+      };
+    });
+
+    await prisma.orders.createMany({
+      data: order,
       skipDuplicates: true,
     });
   }

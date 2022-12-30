@@ -1,7 +1,11 @@
+const { makeStrictEnum } = require("@prisma/client/runtime");
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const monthlySchema = new Schema({
+  _id: {
+    type: String,
+  },
   "Ref No": {
     type: String,
     require: true,

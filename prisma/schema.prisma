@@ -35,6 +35,7 @@ model payments {
 }
 
 model card {
+  id               String  @id @unique
   refno            String  @unique
   merchantName     String?
   merchantCity     String?
