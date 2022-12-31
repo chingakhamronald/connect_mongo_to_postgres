@@ -14,6 +14,8 @@ model orders {
   iid          String  @id @unique
   flightNumber String
   bookingInfo  Json
+  crew         Json
+  sessionId    String?
   totalAmount  Float?
   date         String
   orderno      String?

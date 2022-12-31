@@ -12,6 +12,12 @@ const orderSchema = new Schema({
   bookingInfo: {
     type: Object,
   },
+  crew: {
+    type: Object,
+  },
+  sessionId: {
+    type: String,
+  },
   orderNo: {
     type: String,
   },

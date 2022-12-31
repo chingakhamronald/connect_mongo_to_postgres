@@ -110,6 +110,8 @@ const port = process.env.PORT;
         totalAmount: data.totalAmount,
         flightNumber: data.flightNumber,
         bookingInfo: data.bookingInfo,
+        crew: data.crew,
+        sessionId: data.sessionId,
       };
     });
 
