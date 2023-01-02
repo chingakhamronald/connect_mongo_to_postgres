@@ -2,6 +2,7 @@ const { default: mongoose } = require("mongoose");
 const prisma = require("./constant/client");
 const Connection = require("./database/db");
 const MonthlyCount = require("./schema/monthlySchema");
+const Sessions = require("./schema/sessionSchema");
 const Order = require("./schema/ordersSchema");
 const dotenv = require("dotenv");
 const Express = require("express");
@@ -47,6 +48,24 @@ const port = process.env.PORT;
   //     skipDuplicates: true,
   //   });
   // }
+
+  const sessions = await Sessions.find({}).count();
+
+  for (i = 0; i <= sessions; i += 5000) {
+    const session = (await Sessions.find({}).limit(5000).skip(i)).map(
+      (data) => {
+        return {
+          id: data.id,
+          crew: data.crew,
+        };
+      }
+    );
+
+    await prisma.sessions.createMany({
+      data: session,
+      skipDuplicates: true,
+    });
+  }
 
   for (i = 0; i <= monthlyCount; i += 5000) {
     const orderList = (await MonthlyCount.find({}).limit(5000).skip(i)).map(
@@ -111,7 +130,7 @@ const port = process.env.PORT;
         flightNumber: data.flightNumber,
         bookingInfo: data.bookingInfo,
         crew: data.crew,
-        sessionId: data.sessionId,
+        sessionid: data.sessionId,
       };
     });
 

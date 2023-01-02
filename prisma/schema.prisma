@@ -15,7 +15,7 @@ model orders {
   flightNumber String
   bookingInfo  Json
   crew         Json
-  sessionId    String?
+  sessionid    String?
   totalAmount  Float?
   date         String
   orderno      String?
@@ -77,4 +77,9 @@ model card {
   extraNote8       String?
   extraNote9       String?
   extraNote10      String?
+}
+
+model sessions {
+  id   String @unique
+  crew Json[]
 }

@@ -7,7 +7,7 @@ module.exports.Monthly = async (req, res) => {
 
   try {
     const monthly =
-      await prisma.$queryRaw`SELECT * FROM card  LEFT JOIN orders ON card.refno=orders.orderno LIMIT ${take} OFFSET ${skip}`;
+      await prisma.$queryRaw`SELECT * FROM card  LEFT JOIN orders ON card.refno=orders.orderno LEFT JOIN sessions ON orders.sessionid=sessions.id LIMIT ${take} OFFSET ${skip}`;
 
     const totalMonthlyData = await prisma.card.count();
 
