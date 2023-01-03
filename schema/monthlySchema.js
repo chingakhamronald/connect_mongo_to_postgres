@@ -126,4 +126,4 @@ const monthlySchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("category", monthlySchema, "category");
+module.exports = mongoose.model("mswipe", monthlySchema, "mswipe");

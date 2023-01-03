@@ -83,3 +83,63 @@ model sessions {
   id   String @unique
   crew Json[]
 }
+
+model mswipe {
+  refNo            String  @unique
+  merchantName     String?
+  merchantCity     String?
+  dateTime         String?
+  mId              String?
+  tId              String?
+  custDeviceId     Float?
+  tipAmount        Float?
+  amount           Float?
+  cardNo           String?
+  txType           String?
+  txStatus         String?
+  type             String?
+  authNo           BigInt?
+  rrNo             Float?
+  crType           String?
+  batchNo          Float?
+  batchTotal       String?
+  loginId          Float?
+  cardHolderMobile Float?
+  cardHolderName   String?
+  flightNumber     String?
+  pnr              String?
+  mobile           String?
+  seatNumber       String?
+  customerName     String?
+  sessionId        String?
+  totalAmount      Float?
+  date             String?
+  orderNo          String?
+  email            String?
+  crew_1_Id        BigInt?
+  crew_1_Name      String?
+  crew_1_Position  String?
+  crew_1_Code      String?
+  crew_2_Id        BigInt?
+  crew_2_Name      String?
+  crew_2_Position  String?
+  crew_2_Code      String?
+  crew_3_Id        BigInt?
+  crew_3_Name      String?
+  crew_3_Position  String?
+  crew_3_Code      String?
+  crew_4_Id        BigInt?
+  crew_4_Name      String?
+  crew_4_Position  String?
+  crew_4_Code      String?
+  extraNote1       String?
+  extraNote2       String?
+  extraNote3       String?
+  extraNote4       String?
+  extraNote5       String?
+  extraNote6       String?
+  extraNote7       String?
+  extraNote8       String?
+  extraNote9       String?
+  extraNote10      String?
+}
