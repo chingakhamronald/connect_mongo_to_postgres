@@ -19,6 +19,9 @@ model orders {
   totalAmount  Float?
   date         String
   orderno      String?
+
+  @@index([orderno])
+  @@index([sessionid])
 }
 
 model payments {

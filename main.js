@@ -1,16 +1,7 @@
 const prisma = require("./constant/client");
 const fs = require("fs");
 const csv = require("fast-csv");
-const {
-  mergeMap,
-  switchMap,
-  tap,
-  retry,
-  defer,
-  of,
-  range,
-  Subscription,
-} = require("rxjs");
+const { mergeMap, switchMap, tap, retry, defer, of, range } = require("rxjs");
 
 function flattenObject(ob) {
   const toReturn = {};
@@ -31,12 +22,12 @@ function flattenObject(ob) {
   return toReturn;
 }
 
-const prisma = new PrismaClient();
 const csvStream = csv.format({
   headers: true,
   objectMode: true,
   transform: (r) => flattenObject(r),
 });
+
 const csvOutStream = fs.createWriteStream("out.csv", "utf8");
 
 csvStream.pipe(csvOutStream);
@@ -58,9 +49,7 @@ let sub = null;
       return defer(async () => {
         const skip = Math.max(no - 1, 0) * pageSize;
         const monthly =
-          (await prisma.$queryRaw) <
-          any >
-          `SELECT * FROM card  LEFT JOIN orders ON card.refno=orders.orderno LEFT JOIN sessions ON orders.sessionid=sessions.id LIMIT ${pageSize} OFFSET ${skip}`;
+          await prisma.$queryRaw`SELECT * FROM mswipe LIMIT ${pageSize} OFFSET ${skip}`;
 
         return monthly;
       }).pipe(
