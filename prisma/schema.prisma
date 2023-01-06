@@ -40,46 +40,46 @@ model payments {
 }
 
 model card {
-  id               String  @id @unique
-  refno            String  @unique
-  merchantName     String?
-  merchantCity     String?
-  dateTime         String?
-  mId              String?
-  tId              String?
-  custDeviceId     Float?
-  tipAmount        Float?
-  amount           Float?
-  cardNo           String?
-  txType           String?
-  txStatus         String?
-  type             String?
-  authNo           BigInt?
-  rrNo             Float?
-  crType           String?
-  batchNo          Float?
-  batchTotal       String?
-  loginId          Float?
-  cardHolderMobile Float?
-  cardHolderName   String?
-  cardTxnType      String?
-  email            String?
-  notes            String?
-  applicationNo    String?
-  folioNo          String?
-  schemaType       String?
-  subFundName      String?
-  clientId         String?
-  extraNote1       String?
-  extraNote2       String?
-  extraNote3       String?
-  extraNote4       String?
-  extraNote5       String?
-  extraNote6       String?
-  extraNote7       String?
-  extraNote8       String?
-  extraNote9       String?
-  extraNote10      String?
+  id                 String  @id @unique
+  ref_no             String
+  merchant_name      String?
+  merchant_city      String?
+  date_time          String?
+  m_id               String?
+  t_id               String?
+  cust_device_id     Float?
+  tip_amount         Float?
+  amount             Float?
+  card_no            String?
+  tx_type            String?
+  tx_status          String?
+  type               String?
+  auth_no            BigInt?
+  rr_no              Float?
+  cr_type            String?
+  batch_no           Float?
+  batch_total        String?
+  login_id           Float?
+  card_holder_mobile Float?
+  card_holder_name   String?
+  card_txn_type      String?
+  email              String?
+  notes              String?
+  application_no     String?
+  folio_no           String?
+  schema_type        String?
+  sub_fund_name      String?
+  client_id          String?
+  extra_note1        String?
+  extra_note2        String?
+  extra_note3        String?
+  extra_note4        String?
+  extra_note5        String?
+  extra_note6        String?
+  extra_note7        String?
+  extra_note8        String?
+  extra_note9        String?
+  extra_note10       String?
 }
 
 model sessions {
@@ -88,7 +88,8 @@ model sessions {
 }
 
 model mswipe {
-  refNo            String  @unique
+  id               Int     @id @default(autoincrement())
+  refNo            String?
   merchantName     String?
   merchantCity     String?
   dateTime         String?

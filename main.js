@@ -35,7 +35,8 @@ csvStream.pipe(csvOutStream);
 let sub = null;
 
 (async () => {
-  const total = (await prisma.card.count()) ?? 0;
+  const total = (await prisma.mswipe.count()) ?? 0;
+
   const pageSize = 1000;
   const pages = Math.ceil(total / pageSize);
   let started = 0;
@@ -48,10 +49,13 @@ let sub = null;
     const f = () => {
       return defer(async () => {
         const skip = Math.max(no - 1, 0) * pageSize;
-        const monthly =
-          await prisma.$queryRaw`SELECT * FROM mswipe LIMIT ${pageSize} OFFSET ${skip}`;
 
-        return monthly;
+        const mswipe = await prisma.mswipe.findMany({
+          take: pageSize,
+          skip: skip,
+        });
+
+        return mswipe;
       }).pipe(
         tap({
           error: () => console.error("Retrying", no),
