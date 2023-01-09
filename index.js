@@ -26,6 +26,17 @@ const port = process.env.PORT;
 
   const cardCount = await prisma.card.count();
 
+  const orderFilter = await prisma.orders.findMany({
+    where: {
+      date: {
+        lte: "2020-11-14T01:57:16.000Z",
+        gte: "2020-11-20T02:16:39.000Z",
+      },
+    },
+  });
+
+  console.log({ orderFilter });
+
   // for (i = 0; i <= sessions; i += 5000) {
   //   const session = (await Sessions.find({}).limit(5000).skip(i)).map(
   //     (data) => {
@@ -118,75 +129,75 @@ const port = process.env.PORT;
   //   }
   // }
 
-  for (i = 0; i <= cardCount; i += 5000) {
-    const mswipe = (
-      await prisma.$queryRaw`SELECT * FROM card  LEFT JOIN orders ON card.ref_no=orders.orderno LEFT JOIN sessions ON orders.sessionid=sessions.id
-       LIMIT 5000 OFFSET ${i}`
-    ).map((e) => {
-      return {
-        refNo: e.ref_no,
-        merchantName: e.merchant_name,
-        merchantCity: e.merchant_city,
-        dateTime: e.date_time,
-        mId: e.m_id,
-        tId: e.t_id,
-        custDeviceId: e.cust_device_id,
-        tipAmount: e.tip_amount,
-        amount: e.amount,
-        cardNo: e.card_no,
-        txType: e.tx_type,
-        txStatus: e.tx_status,
-        type: e.type,
-        authNo: e.auth_no,
-        rrNo: e.rr_no,
-        crType: e.cr_type,
-        batchNo: e.batch_no,
-        batchTotal: e.batch_total,
-        loginId: e.login_id,
-        cardHolderName: e.card_holder_name,
-        cardHolderMobile: e.card_holder_mobile,
-        flightNumber: e.flightNumber,
-        pnr: e.bookingInfo?.pnr,
-        mobile: e.bookingInfo?.mobile,
-        seatNumber: e.bookingInfo?.seatNumber,
-        customerName: e.bookingInfo?.customerName,
-        sessionId: e.sessionid,
-        totalAmount: e.totalAmount,
-        date: e?.date,
-        orderNo: e.orderno,
-        email: e.email,
-        crew_1_Id: e.crew === null ? null : e?.crew[0]?.employeeId,
-        crew_1_Name: e.crew === null ? null : e?.crew[0]?.employeeName,
-        crew_1_Position: e.crew === null ? null : e?.crew[0]?.position,
-        crew_1_Code: e.crew === null ? null : e?.crew[0]?.employeeCode,
-        crew_2_Id: e.crew === null ? null : e?.crew[1]?.employeeId,
-        crew_2_Name: e.crew === null ? null : e?.crew[1]?.employeeName,
-        crew_2_Position: e.crew === null ? null : e?.crew[1]?.position,
-        crew_2_Code: e.crew === null ? null : e?.crew[1]?.employeeCode,
-        crew_3_Id: e.crew === null ? null : e?.crew[2]?.employeeId,
-        crew_3_Name: e.crew === null ? null : e?.crew[2]?.employeeName,
-        crew_3_Position: e.crew === null ? null : e?.crew[2]?.position,
-        crew_3_Code: e.crew === null ? null : e?.crew[2]?.employeeCode,
-        crew_4_Id: e.crew === null ? null : e?.crew[3]?.employeeId,
-        crew_4_Name: e.crew === null ? null : e?.crew[3]?.employeeName,
-        crew_4_Position: e.crew === null ? null : e?.crew[3]?.position,
-        crew_4_Code: e.crew === null ? null : e?.crew[3]?.employeeCode,
-        extra_note1: e.extraNote1,
-        extra_note2: e.extraNote2,
-        extra_note3: e.extraNote3,
-        extra_note4: e.extraNote4,
-        extra_note5: e.extraNote5,
-        extra_note6: e.extraNote6,
-        extra_note7: e.extraNote7,
-        extra_note8: e.extraNote8,
-        extra_note9: e.extraNote9,
-        extra_note10: e.extraNote10,
-      };
-    });
-    await prisma.mswipe.createMany({
-      data: mswipe,
-    });
-  }
+  // for (i = 0; i <= cardCount; i += 5000) {
+  //   const mswipe = (
+  //     await prisma.$queryRaw`SELECT * FROM card  LEFT JOIN orders ON card.ref_no=orders.orderno LEFT JOIN sessions ON orders.sessionid=sessions.id
+  //      LIMIT 5000 OFFSET ${i}`
+  //   ).map((e) => {
+  //     return {
+  //       refNo: e.ref_no,
+  //       merchantName: e.merchant_name,
+  //       merchantCity: e.merchant_city,
+  //       dateTime: e.date_time,
+  //       mId: e.m_id,
+  //       tId: e.t_id,
+  //       custDeviceId: e.cust_device_id,
+  //       tipAmount: e.tip_amount,
+  //       amount: e.amount,
+  //       cardNo: e.card_no,
+  //       txType: e.tx_type,
+  //       txStatus: e.tx_status,
+  //       type: e.type,
+  //       authNo: e.auth_no,
+  //       rrNo: e.rr_no,
+  //       crType: e.cr_type,
+  //       batchNo: e.batch_no,
+  //       batchTotal: e.batch_total,
+  //       loginId: e.login_id,
+  //       cardHolderName: e.card_holder_name,
+  //       cardHolderMobile: e.card_holder_mobile,
+  //       flightNumber: e.flightNumber,
+  //       pnr: e.bookingInfo?.pnr,
+  //       mobile: e.bookingInfo?.mobile,
+  //       seatNumber: e.bookingInfo?.seatNumber,
+  //       customerName: e.bookingInfo?.customerName,
+  //       sessionId: e.sessionid,
+  //       totalAmount: e.totalAmount,
+  //       date: e?.date,
+  //       orderNo: e.orderno,
+  //       email: e.email,
+  //       crew_1_Id: e.crew === null ? null : e?.crew[0]?.employeeId,
+  //       crew_1_Name: e.crew === null ? null : e?.crew[0]?.employeeName,
+  //       crew_1_Position: e.crew === null ? null : e?.crew[0]?.position,
+  //       crew_1_Code: e.crew === null ? null : e?.crew[0]?.employeeCode,
+  //       crew_2_Id: e.crew === null ? null : e?.crew[1]?.employeeId,
+  //       crew_2_Name: e.crew === null ? null : e?.crew[1]?.employeeName,
+  //       crew_2_Position: e.crew === null ? null : e?.crew[1]?.position,
+  //       crew_2_Code: e.crew === null ? null : e?.crew[1]?.employeeCode,
+  //       crew_3_Id: e.crew === null ? null : e?.crew[2]?.employeeId,
+  //       crew_3_Name: e.crew === null ? null : e?.crew[2]?.employeeName,
+  //       crew_3_Position: e.crew === null ? null : e?.crew[2]?.position,
+  //       crew_3_Code: e.crew === null ? null : e?.crew[2]?.employeeCode,
+  //       crew_4_Id: e.crew === null ? null : e?.crew[3]?.employeeId,
+  //       crew_4_Name: e.crew === null ? null : e?.crew[3]?.employeeName,
+  //       crew_4_Position: e.crew === null ? null : e?.crew[3]?.position,
+  //       crew_4_Code: e.crew === null ? null : e?.crew[3]?.employeeCode,
+  //       extra_note1: e.extraNote1,
+  //       extra_note2: e.extraNote2,
+  //       extra_note3: e.extraNote3,
+  //       extra_note4: e.extraNote4,
+  //       extra_note5: e.extraNote5,
+  //       extra_note6: e.extraNote6,
+  //       extra_note7: e.extraNote7,
+  //       extra_note8: e.extraNote8,
+  //       extra_note9: e.extraNote9,
+  //       extra_note10: e.extraNote10,
+  //     };
+  //   });
+  //   await prisma.mswipe.createMany({
+  //     data: mswipe,
+  //   });
+  // }
 })().finally(() => {
   mongoose.disconnect();
 });
