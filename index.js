@@ -26,17 +26,6 @@ const port = process.env.PORT;
 
   const cardCount = await prisma.card.count();
 
-  const orderFilter = await prisma.orders.findMany({
-    where: {
-      date: {
-        lte: "2020-11-14T01:57:16.000Z",
-        gte: "2020-11-20T02:16:39.000Z",
-      },
-    },
-  });
-
-  console.log({ orderFilter });
-
   // for (i = 0; i <= sessions; i += 5000) {
   //   const session = (await Sessions.find({}).limit(5000).skip(i)).map(
   //     (data) => {
