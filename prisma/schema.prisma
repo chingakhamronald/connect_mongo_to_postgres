@@ -40,27 +40,27 @@ model payments {
 }
 
 model card {
-  id                 String  @id @unique
+  id                 Int     @id @default(autoincrement())
   ref_no             String
   merchant_name      String?
   merchant_city      String?
   date_time          String?
   m_id               String?
   t_id               String?
-  cust_device_id     Float?
-  tip_amount         Float?
-  amount             Float?
+  cust_device_id     String?
+  tip_amount         String?
+  amount             String?
   card_no            String?
   tx_type            String?
   tx_status          String?
   type               String?
-  auth_no            BigInt?
-  rr_no              Float?
+  auth_no            String?
+  rr_no              String?
   cr_type            String?
-  batch_no           Float?
+  batch_no           String?
   batch_total        String?
-  login_id           Float?
-  card_holder_mobile Float?
+  login_id           String?
+  card_holder_mobile String?
   card_holder_name   String?
   card_txn_type      String?
   email              String?
